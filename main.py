@@ -38,7 +38,7 @@ def submit(values):
     #submit to server
     print "------------"
     print tosubmit
-    r = requests.post('http://192.168.43.150:3000/measurements', data=tosubmit)
+    r = requests.post('http://192.168.43.150:3000/measurements', json=tosubmit)
 
 def main():
     try:
