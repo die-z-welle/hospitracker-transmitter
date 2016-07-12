@@ -1,3 +1,5 @@
+
+
 # BLE iBeaconScanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # JCS 06/07/14
 
@@ -19,6 +21,7 @@ import os
 import sys
 import struct
 import bluetooth._bluetooth as bluez
+import time
 
 LE_META_EVENT = 0x3e
 LE_PUBLIC_ADDRESS=0x00
@@ -126,7 +129,9 @@ def parse_events(sock, loop_count=100):
     done = False
     results = []
     myFullList = []
-    for i in range(0, loop_count):
+    #for i in range(0, loop_count):
+    start = time.time()
+    while (time.time() - start < loop_count):
         pkt = sock.recv(255)
         ptype, event, plen = struct.unpack("BBB", pkt[:3])
         #print "--------------" 

@@ -11,10 +11,11 @@ import bluetooth._bluetooth as bluez
 
 DEV_ID = 0
 CHECK_INTERVAL = 10
+DEVICE_ID = 2
 
 def run():
     while True:        
-        returnedList = blescan.parse_events(sock, 250)
+        returnedList = blescan.parse_events(sock, 5)
         currenttime = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         measurements = {}
         results = []
@@ -40,7 +41,7 @@ def median(array):
             
 def submitWorker():
     while True:
-        tosubmit = {'deviceId': 1, 'measurements': q.get()}
+        tosubmit = {'deviceId': DEVICE_ID, 'measurements': q.get()}
         #try seding 5 times, if all fail, move on to the next
         attempts = 0
         while attempts<5:
